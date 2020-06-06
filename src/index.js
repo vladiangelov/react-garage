@@ -2,31 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import CarsIndex from './containers/CarsIndex';
-import { createStore } from 'redux'; // applyMiddleware
+import CarShow from './components/CarShow';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './reducers/rootReducer';
+import reduxPromise from 'redux-promise';
+
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; // Redirect
 import { createBrowserHistory as history } from 'history';
 
+const middlewares = applyMiddleware(reduxPromise);
+
 const initialState = {
-  cars: [
-  { id: 1, brand: 'Peugeot', model: '106', owner: 'John', plate: 'WOB-ED-42' },
-  { id: 2, brand: 'Renault', model: 'Scenic', owner: 'Paul', plate: 'AAA-12-BC' },
-  { id: 3, brand: 'Aston Martin', model: 'DB Mark III', owner: 'James', plate: '418-ED-94' },
-  { id: 4, brand: 'VW', model: 'Beetle', owner: 'George', plate: '1234-XD-75' }
-  ]
+  cars: []
 };
 
-const store = createStore(rootReducer, initialState);
+const store = createStore(rootReducer, initialState, middlewares);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router history={history}>
        <Switch>
-         <Route path="/" component={CarsIndex} />
+         <Route path="/" exact component={CarsIndex} />
+         <Route path="/cars/:car" component={CarShow} />
        </Switch>
      </Router>
     </Provider>
