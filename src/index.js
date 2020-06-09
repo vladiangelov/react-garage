@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import CarsIndex from './containers/CarsIndex';
-import CarShow from './components/CarShow';
+import CarShow from './containers/CarShow';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
@@ -25,10 +25,12 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router history={history}>
-       <Switch>
-         <Route path="/" exact component={CarsIndex} />
-         <Route path="/cars/:car" component={CarShow} />
-       </Switch>
+        <div className="view-container">
+         <Switch>
+           <Route path="/" exact component={CarsIndex} />
+           <Route path="/cars/:car" component={CarShow} />
+         </Switch>
+        </div>
      </Router>
     </Provider>
   </React.StrictMode>,
