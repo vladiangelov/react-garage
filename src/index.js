@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import CarsIndex from './containers/CarsIndex';
 import CarShow from './containers/CarShow';
+import CarForm from './containers/CarForm';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
@@ -28,6 +29,7 @@ ReactDOM.render(
         <div className="view-container">
          <Switch>
            <Route path="/" exact component={CarsIndex} />
+           <Route path="/cars/new" component={CarForm} />
            <Route path="/cars/:car" component={CarShow} />
          </Switch>
         </div>
