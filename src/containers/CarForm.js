@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 class CarForm extends Component {
 
   onSubmit = (values) => {
-    this.props.createCar(values, (post) => {
+    this.props.createCar(values, (car) => {
       this.props.history.push('/'); // Navigate after submit
-      return post;
+      return car;
     });
   }
 
@@ -29,7 +29,7 @@ class CarForm extends Component {
 
   render() {
     return [
-      <SideBar key="SideBar" garage={this.props.garage}>
+      <SideBar key="SideBar">
         <Link to="/">Back to list</Link>
       </SideBar>,
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -63,10 +63,7 @@ class CarForm extends Component {
         </button>
       </form>
     ];
-
-
   }
-
 }
 
 export default reduxForm({ form: 'newCarForm' })(
